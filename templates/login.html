@@ -6,9 +6,38 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="../styles/style.css">
   <title>Document</title>
+  <style>
+    body{
+        background-color: black;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    h1{
+        font-size: 50px;
+        color: #fff;
+        text-align: center;
+        margin-bottom: 40px;
+    }
+    h1{
+        font-size: 50px;
+        color: #fff;
+        text-align: center;
+    }
+    input[type="submit"]{
+        margin-top: 20px;
+        background-color: #fbb51f;
+        font-weight: 900;
+    }
+    form{
+      color: #fff;
+    }
+</style>
 </head>
 <body>
-    <h1>Login</h1>
+    <h1>PELIS PROGII</h1>
+    <h4>LOGIN</h4>
     <form action="/login" method="post">
         <label for="username">Username:</label>
         <input type="text" id="username" name="username">
@@ -16,7 +45,7 @@
         <label for="password">Password:</label>
         <input type="password" id="password" name="password">
         <br>
-        <input type="submit" value="Submit">
+        <input type="submit" value="Ingresar">
     </form> 
 </body>
 

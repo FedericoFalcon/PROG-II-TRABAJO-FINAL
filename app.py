@@ -1,4 +1,4 @@
-from flask import Flask, request, redirect, render_template
+from flask import Flask, request, redirect, render_template, jsonify
 import json
 import urllib.request
 
@@ -64,12 +64,16 @@ def home_guest():
 @app.route('/home_guest', methods=['POST'])
 def handle_click():
 
-    pelis = ""
+    return movies
 
-    for i in movies:
-       pelis = pelis + "<br>" + (i["title"])
 
-    return pelis
+@app.route('/movies',  methods=['GET'])
+def nada():
+    print(request.form)
+    return "ok"
+
+
+
 
 app.run(debug=True)
 
