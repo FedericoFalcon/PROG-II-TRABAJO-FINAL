@@ -71,3 +71,5 @@ def handle_click():
 
     return pelis
 
+app.run(debug=True)
+

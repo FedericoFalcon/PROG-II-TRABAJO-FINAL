@@ -40,11 +40,11 @@ Trabajo Final
 #     nuevoString = nuevoString + i.decode()
 
 # # print(type(nuevoString))
-# print(nuevoString)
+# # print(nuevoString)
 
 # arrayJson = json.loads(nuevoString)
-# print(type(arrayJson))
-# print(arrayJson)
+# # print(type(arrayJson))
+# # print(arrayJson)
 
 # for i in arrayJson["users"]:
 #     print(i["first_name"])
@@ -58,10 +58,10 @@ urlhandler = urllib.request.urlopen("https://www.mockachino.com/dfded66a-9588-4d
 for i in urlhandler:
     arrayJson2 = json.loads(i)
 
-# print(type(arrayJson2))
+print(type(arrayJson2))
 print(arrayJson2)
 
-# for i in arrayJson2["users"]:
-#     print(i["date_of_birth"]) 
+for i in arrayJson2["users"]:
+    print(i["date_of_birth"]) 
 
 # test nacho nuevo febrero
