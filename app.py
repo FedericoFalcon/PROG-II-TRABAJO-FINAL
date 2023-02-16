@@ -67,15 +67,6 @@ def handle_click():
 
     return movies
 
-
-@app.route('/movies',  methods=['GET'])
-def nada():
-    print(request.form)
-    return "ok"
-
-
-
-
 @app.route('/movies')
 def getMovies():
     return jsonify({"Peliculas": movies, "mensaje": "Lista de peliculas"})
@@ -88,7 +79,19 @@ def getMovie(movie_title):
         return jsonify({"Pelicula": PeliBuscada[0]})
         
     return jsonify({'Mensaje': "Pelicula no encontrada"})
-    
+
+@app.route('/movies', methods=['POST'])
+def addMovie():
+    new_movie = {
+        "title": request.json['title'],
+        "director": request.json['director'],
+        "release_year": request.json['release_year'],
+        "rating": request.json['rating']
+    }
+
+    movies.append(new_movie)
+
+    return jsonify({"message": "Pelicula agregada correctamente", "Movies": movies})
 
 
 app.run(debug=True)
