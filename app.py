@@ -43,7 +43,7 @@ movies = [
     }
 ]
 
-@app.route('/login', methods=['POST'])
+@app.route('/login', methods=['POST'])  
 def login():
     username = request.form['username']
     password = request.form['password']
@@ -103,9 +103,18 @@ def editMovie(movie_title):
         PeliBuscada[0]['release_year'] = request.json['release_year']
         PeliBuscada[0]['rating'] = request.json['rating']
         
-        return jsonify({ "message": "Pelicula actualizada", "Pelicula": PeliBuscada[0]})
+        return jsonify({"message": "Pelicula actualizada", "Pelicula": PeliBuscada[0]})
     return jsonify({"message": "Pelicula no encontrada"})
 
+@app.route('/movies/<string:movie_title>', methods = ['DELETE'])
+def deleteMovie(movie_title):
+    PeliBuscada = [peli for peli in movies if peli['title'] == movie_title]
+
+    if (len(PeliBuscada) > 0):
+        movies.remove(PeliBuscada[0])
+        return jsonify({ "message": "Pelicula eliminada correctamente", "Movies": movies})
+    
+    return jsonify({"message": "Pelicula no encontrada"})
 
 
 app.run(debug=True)
