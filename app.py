@@ -1,6 +1,7 @@
 from flask import Flask, request, redirect, render_template, jsonify
 import json
 import urllib.request
+from movies import movies
 
 app = Flask(__name__)
 
@@ -73,6 +74,21 @@ def nada():
     return "ok"
 
 
+
+
+@app.route('/movies')
+def getMovies():
+    return jsonify({"Peliculas": movies, "mensaje": "Lista de peliculas"})
+
+@app.route('/movies/<string:movie_title>')
+def getMovie(movie_title):
+    PeliBuscada = [peli for peli in movies if peli['title'] == movie_title]
+
+    if (len(PeliBuscada) > 0):  
+        return jsonify({"Pelicula": PeliBuscada[0]})
+        
+    return jsonify({'Mensaje': "Pelicula no encontrada"})
+    
 
 
 app.run(debug=True)
