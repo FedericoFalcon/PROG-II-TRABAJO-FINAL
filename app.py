@@ -1,6 +1,7 @@
-from flask import Flask, request, redirect, render_template
+from flask import Flask, request, redirect, render_template, jsonify
 import json
 import urllib.request
+from movies import movies
 
 app = Flask(__name__)
 
@@ -70,6 +71,10 @@ def handle_click():
        pelis = pelis + "<br>" + (i["title"])
 
     return pelis
+
+@app.route('/movies')
+def getMovies():
+    return jsonify({"Peliculas": movies, "mensaje": "Lista de peliculas"})
 
 app.run(debug=True)
 
