@@ -93,6 +93,20 @@ def addMovie():
 
     return jsonify({"message": "Pelicula agregada correctamente", "Movies": movies})
 
+@app.route('/movies/<string:movie_title>', methods=['PUT'])
+def editMovie(movie_title):
+    PeliBuscada = [peli for peli in movies if peli['title'] == movie_title]
+    
+    if(len(PeliBuscada) > 0):
+        PeliBuscada[0]['title'] = request.json['title']
+        PeliBuscada[0]['director'] = request.json['director']
+        PeliBuscada[0]['release_year'] = request.json['release_year']
+        PeliBuscada[0]['rating'] = request.json['rating']
+        
+        return jsonify({ "message": "Pelicula actualizada", "Pelicula": PeliBuscada[0]})
+    return jsonify({"message": "Pelicula no encontrada"})
+
+
 
 app.run(debug=True)
 
