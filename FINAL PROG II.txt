@@ -1,0 +1,29 @@
+-Login con user y pass  --> OK
+
+-BBDD con pelis : completar
+
+-Director y genero con select : hacer
+
+-Modulo publico : OK
+
+-Funcionalidad elegir director y que muestre solo esas pelis : HACER
+
+-Edicion y eliminacion (Solo para registrados):
+	Solo si la peli no tiene comentarios : hacer
+	Editar la info, pero no comentarios de otros usuarios.
+
+-Endpoints:
+	Devolver la lista de directores
+	Devolver la lista de generos
+	Devolver las peliculas dirigidas por un director en particular
+	Devolver las peliculas que tienen de portada agregada
+	Funcionalidad adicional
+
+-Documentar con postman	
+
+-Febrero:
+	Paginado
+	Buscador de peliculas y actores
+	
+	
+	

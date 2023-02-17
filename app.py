@@ -1,54 +1,35 @@
 from flask import Flask, request, redirect, render_template, jsonify
 import json
-import urllib.request
-from movies import movies
+# import urllib.request
 
 app = Flask(__name__)
-
-# FLASK_APP = "nombre que queramos"
-
-# @app.route("/")
-# def home():
-#     return "Hello, Flask! <br> Lalala"
 
 @app.route('/')
 def index():
     return render_template('login.html')
 
+with open('users.json') as u:
+    dataUsers = json.load(u)
 
-users = {
-    'elmago24': 'elmago22',
-    'bokitabebianchi': 'la12',
-    'marcelocarp': 'gallardoteamo'
-}
+# Imprimir el contenido
+print(dataUsers)
 
-movies = [
-    {
-        "title": "The Matrix",
-        "director": "The Wachowskis",
-        "release_year": 1999,
-        "rating": 8.7
-    },
-    {
-        "title": "Inception",
-        "director": "Christopher Nolan",
-        "release_year": 2010,
-        "rating": 8.8
-    },
-    {
-        "title": "The Shawshank Redemption",
-        "director": "Frank Darabont",
-        "release_year": 1994,
-        "rating": 9.3
-    }
-]
+
+# Abrir el archivo JSON y leer su contenido
+with open('movies.json') as f:
+    data = json.load(f)
+
+# Imprimir el contenido
+print(data)
+
+
 
 @app.route('/login', methods=['POST'])  
 def login():
     username = request.form['username']
     password = request.form['password']
     
-    if username in users and users[username] == password:
+    if username in dataUsers and dataUsers[password] == password:
         return redirect('/home')
     else:
         return redirect('/home_guest')
@@ -65,15 +46,15 @@ def home_guest():
 @app.route('/home_guest', methods=['POST'])
 def handle_click():
 
-    return movies
+    return data
 
 @app.route('/movies')
 def getMovies():
-    return jsonify({"Peliculas": movies, "mensaje": "Lista de peliculas"})
+    return jsonify({"Peliculas": data, "mensaje": "Lista de peliculas"})
 
 @app.route('/movies/<string:movie_title>')
 def getMovie(movie_title):
-    PeliBuscada = [peli for peli in movies if peli['title'] == movie_title]
+    PeliBuscada = [peli for peli in data if peli['title'] == movie_title]
 
     if (len(PeliBuscada) > 0):  
         return jsonify({"Pelicula": PeliBuscada[0]})
@@ -89,13 +70,13 @@ def addMovie():
         "rating": request.json['rating']
     }
 
-    movies.append(new_movie)
+    data.append(new_movie)
 
-    return jsonify({"message": "Pelicula agregada correctamente", "Movies": movies})
+    return jsonify({"message": "Pelicula agregada correctamente", "Movies": data})
 
 @app.route('/movies/<string:movie_title>', methods=['PUT'])
 def editMovie(movie_title):
-    PeliBuscada = [peli for peli in movies if peli['title'] == movie_title]
+    PeliBuscada = [peli for peli in data if peli['title'] == movie_title]
     
     if(len(PeliBuscada) > 0):
         PeliBuscada[0]['title'] = request.json['title']
@@ -108,11 +89,11 @@ def editMovie(movie_title):
 
 @app.route('/movies/<string:movie_title>', methods = ['DELETE'])
 def deleteMovie(movie_title):
-    PeliBuscada = [peli for peli in movies if peli['title'] == movie_title]
+    PeliBuscada = [peli for peli in data if peli['title'] == movie_title]
 
     if (len(PeliBuscada) > 0):
-        movies.remove(PeliBuscada[0])
-        return jsonify({ "message": "Pelicula eliminada correctamente", "Movies": movies})
+        data.remove(PeliBuscada[0])
+        return jsonify({ "message": "Pelicula eliminada correctamente", "Movies": data})
     
     return jsonify({"message": "Pelicula no encontrada"})
 
