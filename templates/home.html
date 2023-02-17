@@ -5,58 +5,44 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <style>
-        body{
-            background-color: lightblue;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-        h1{
-            font-size: 50px;
-            color: #fff;
-            text-align: center;
-        }
-        input[type="submit"]{
-            margin-top: 20px;
-            background-color: #fbb51f;
-            font-weight: 900;
-        }
-        form{
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-
-        }
-        input{
-            margin-bottom: 10px;
-        }
-    </style>
 </head>
 <body>
     <h1> BIENVENIDO AL HOME USUARIO REGISTRADO</h1>
-    <form method="post">
-        <input type="submit" value="Ver lista de peliculas">
-    </form>
 
-    <h1>Agregar pelicula</h1>
-    <form method="post" action="/movies/add_movie">
-        <label for="title">Titulo:</label>
-        <input type="text" name="title" id="title"><br>
-  
-        <label for="director">Director:</label>
-        <input type="text" name="director" id="director"><br>
-  
-        <label for="release_year">Ano de Lanzamiento:</label>
-        <input type="text" name="release_year" id="release_year"><br>
-  
-        <label for="rating">Rating:</label>
-        <input type="text" name="rating" id="rating"><br>
-  
-        <button type="submit">Añadir</button>
-      </form>
+    <div>
+        <form method="post">
+            <input type="submit" value="Ver listado de peliculas">
+        </form>
+    </div>
+
+    <div class="form-box">
+        <h3>Buscar película</h3>
+        <form method="GET" action="/search">
+            <label for="movie_title">Título:</label>
+            <input type="text" name="movie_title" id="movie_title" required>
+            <input type="submit" value="Buscar">
+          </form>
+    </div>
+
+    <div class="form-box">
+        <h3>Agregar pelicula</h3>
+        <form method="post" action="/movies/add_movie">
+            <label for="title">Titulo:</label>
+            <input type="text" name="title" id="title"><br>
+      
+            <label for="director">Director:</label>
+            <input type="text" name="director" id="director"><br>
+      
+            <label for="release_year">Ano de Lanzamiento:</label>
+            <input type="text" name="release_year" id="release_year"><br>
+      
+            <label for="rating">Rating:</label>
+            <input type="text" name="rating" id="rating"><br>
+      
+            <input type="submit" value="Añadir">
+          </form>
+    </div>
+
 
     <form method="put">
         <input type="submit" value="Editar pelicula">
@@ -67,11 +53,55 @@
         <input type="submit" value="Eliminar pelicula">
     </form>
 
-    <h1>Buscar peli</h1>
-    <form method="GET" action="/search">
-        <label for="movie_title">Buscar película:</label>
-        <input type="text" name="movie_title" id="movie_title" required>
-        <button type="submit">Buscar</button>
-      </form>
 </body>
+
+<style>
+    body{
+        background-color: #000;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        color: #fff;
+    }
+    h1{
+        font-size: 50px;
+        color: #fff;
+        text-align: center;
+    }
+    input[type="submit"]{
+        margin-top: 20px;
+        background-color: #fbb51f;
+        font-weight: 900;
+    }
+    form{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    input{
+        margin-bottom: 10px;
+    }
+
+    .form-box{
+        border: 2px solid #fbb51f;
+        border-radius: 5px;
+        padding: 20px;
+    }
+
+    h3{
+        font-size: 18px;
+        color: #000;
+        text-align: center;
+        background-color: #fbb51f;
+    }
+    div{
+        margin-bottom: 20px;
+    }
+    label{
+        margin-bottom: 5px;
+    }
+</style>
+
 </html>

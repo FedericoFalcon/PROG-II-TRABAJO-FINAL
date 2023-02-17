@@ -83,7 +83,7 @@ def addMovie():
         with open("movies.json", "w") as f:
             json.dump(data, f)
         
-        return jsonify({"Movies": data})
+    return jsonify({"Movies": data})
 
 
 @app.route('/movies/<string:movie_title>', methods=['PUT'])
