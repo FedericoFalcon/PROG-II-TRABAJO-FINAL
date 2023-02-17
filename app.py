@@ -58,18 +58,21 @@ def getMovie(movie_title):
         
     return jsonify({'Mensaje': "Pelicula no encontrada"})
 
-@app.route('/movies', methods=['POST'])
+@app.route('/movie/add_movie', methods=['POST'])
 def addMovie():
-    new_movie = {
-        "title": request.json['title'],
-        "director": request.json['director'],
-        "release_year": request.json['release_year'],
-        "rating": request.json['rating']
-    }
+    if request.method == 'POST':
+        new_movie = {
+            "title": request.form['title'],
+            "director": request.form['director'],
+            "release_year": request.form['release_year'],
+            "rating": request.form['rating']
+        }
 
-    data.append(new_movie)
+        data.append(new_movie)
+        
+        return jsonify({"message": "Pelicula agregada correctamente", "Movies": data})
 
-    return jsonify({"message": "Pelicula agregada correctamente", "Movies": data})
+    return render_template('add_movie.html')
 
 @app.route('/movies/<string:movie_title>', methods=['PUT'])
 def editMovie(movie_title):

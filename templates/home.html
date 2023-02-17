@@ -31,10 +31,21 @@
         <input type="submit" value="Ver lista de peliculas">
     </form>
 
-    <form method="post">
-        <input type="submit" value="Agregar pelicula">
-        
-    </form>
+    <form method="POST" action="/movie/add_movie">
+        <label for="title">Titulo:</label>
+        <input type="text" name="title" id="title"><br>
+  
+        <label for="director">Director:</label>
+        <input type="text" name="director" id="director"><br>
+  
+        <label for="release_year">Ano de Lanzamiento:</label>
+        <input type="text" name="release_year" id="release_year"><br>
+  
+        <label for="rating">Clasificacion:</label>
+        <input type="text" name="rating" id="rating"><br>
+  
+        <button type="submit">Agregar Pelicula</button>
+      </form>
 
     <form method="put">
         <input type="submit" value="Editar pelicula">
