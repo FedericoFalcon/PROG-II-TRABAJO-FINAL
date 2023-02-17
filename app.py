@@ -43,7 +43,7 @@ movies = [
     }
 ]
 
-@app.route('/login', methods=['POST'])
+@app.route('/login', methods=['POST'])  
 def login():
     username = request.form['username']
     password = request.form['password']
@@ -68,6 +68,14 @@ def handle_click():
     return movies
 
 
+@app.route('/movies',  methods=['GET'])
+def nada():
+    print(request.form)
+    return "ok"
+
+
+
+
 @app.route('/movies')
 def getMovies():
     return jsonify({"Peliculas": movies, "mensaje": "Lista de peliculas"})
@@ -80,7 +88,42 @@ def getMovie(movie_title):
         return jsonify({"Pelicula": PeliBuscada[0]})
         
     return jsonify({'Mensaje': "Pelicula no encontrada"})
+
+@app.route('/movies', methods=['POST'])
+def addMovie():
+    new_movie = {
+        "title": request.json['title'],
+        "director": request.json['director'],
+        "release_year": request.json['release_year'],
+        "rating": request.json['rating']
+    }
+
+    movies.append(new_movie)
+
+    return jsonify({"message": "Pelicula agregada correctamente", "Movies": movies})
+
+@app.route('/movies/<string:movie_title>', methods=['PUT'])
+def editMovie(movie_title):
+    PeliBuscada = [peli for peli in movies if peli['title'] == movie_title]
     
+    if(len(PeliBuscada) > 0):
+        PeliBuscada[0]['title'] = request.json['title']
+        PeliBuscada[0]['director'] = request.json['director']
+        PeliBuscada[0]['release_year'] = request.json['release_year']
+        PeliBuscada[0]['rating'] = request.json['rating']
+        
+        return jsonify({"message": "Pelicula actualizada", "Pelicula": PeliBuscada[0]})
+    return jsonify({"message": "Pelicula no encontrada"})
+
+@app.route('/movies/<string:movie_title>', methods = ['DELETE'])
+def deleteMovie(movie_title):
+    PeliBuscada = [peli for peli in movies if peli['title'] == movie_title]
+
+    if (len(PeliBuscada) > 0):
+        movies.remove(PeliBuscada[0])
+        return jsonify({ "message": "Pelicula eliminada correctamente", "Movies": movies})
+    
+    return jsonify({"message": "Pelicula no encontrada"})
 
 
 app.run(debug=True)
