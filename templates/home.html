@@ -7,7 +7,7 @@
     <title>Document</title>
     <style>
         body{
-            background-color: black;
+            background-color: lightblue;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -23,6 +23,16 @@
             background-color: #fbb51f;
             font-weight: 900;
         }
+        form{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+        }
+        input{
+            margin-bottom: 10px;
+        }
     </style>
 </head>
 <body>
@@ -31,6 +41,7 @@
         <input type="submit" value="Ver lista de peliculas">
     </form>
 
+    <h1>Agregar pelicula</h1>
     <form method="POST" action="/movie/add_movie">
         <label for="title">Titulo:</label>
         <input type="text" name="title" id="title"><br>
@@ -41,10 +52,10 @@
         <label for="release_year">Ano de Lanzamiento:</label>
         <input type="text" name="release_year" id="release_year"><br>
   
-        <label for="rating">Clasificacion:</label>
+        <label for="rating">Rating:</label>
         <input type="text" name="rating" id="rating"><br>
   
-        <button type="submit">Agregar Pelicula</button>
+        <button type="submit">Añadir</button>
       </form>
 
     <form method="put">

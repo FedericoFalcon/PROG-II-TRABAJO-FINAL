@@ -23,13 +23,9 @@ def login():
     for user in dataUsers['users']:
         if user['username'] == username and user['password'] == password:
           return redirect('/home')
-        else:
-            return redirect('/home_guest')
+        
+    return redirect('/home_guest')
 
-    if username in dataUsers and dataUsers[username] == password:
-        return redirect('/home')
-    else:
-        return redirect('/home_guest')
 
 @app.route('/home')
 def home():
@@ -69,10 +65,11 @@ def addMovie():
         }
 
         data.append(new_movie)
+        with open('movies.json', 'w') as f:
+            json.dump(data, f)
         
-        return jsonify({"message": "Pelicula agregada correctamente", "Movies": data})
+        return jsonify({"Movies": data})
 
-    return render_template('add_movie.html')
 
 @app.route('/movies/<string:movie_title>', methods=['PUT'])
 def editMovie(movie_title):
