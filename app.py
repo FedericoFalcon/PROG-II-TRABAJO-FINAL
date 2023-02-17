@@ -11,17 +11,8 @@ def index():
 with open('users.json') as u:
     dataUsers = json.load(u)
 
-# Imprimir el contenido
-print(dataUsers)
-
-
-# Abrir el archivo JSON y leer su contenido
 with open('movies.json') as f:
     data = json.load(f)
-
-# Imprimir el contenido
-print(data)
-
 
 
 @app.route('/login', methods=['POST'])  
@@ -29,7 +20,13 @@ def login():
     username = request.form['username']
     password = request.form['password']
     
-    if username in dataUsers and dataUsers[password] == password:
+    for user in dataUsers['users']:
+        if user['username'] == username and user['password'] == password:
+          return redirect('/home')
+        else:
+            return redirect('/home_guest')
+
+    if username in dataUsers and dataUsers[username] == password:
         return redirect('/home')
     else:
         return redirect('/home_guest')
