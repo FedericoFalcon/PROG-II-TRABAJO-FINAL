@@ -67,15 +67,6 @@ def handle_click():
 
     return movies
 
-
-@app.route('/movies',  methods=['GET'])
-def nada():
-    print(request.form)
-    return "ok"
-
-
-
-
 @app.route('/movies')
 def getMovies():
     return jsonify({"Peliculas": movies, "mensaje": "Lista de peliculas"})
