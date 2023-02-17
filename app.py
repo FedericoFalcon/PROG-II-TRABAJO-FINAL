@@ -4,17 +4,20 @@ import json
 
 app = Flask(__name__)
 
+# Render Login
 @app.route('/')
 def index():
     return render_template('login.html')
 
+# Importamos los usuarios as dataUsers
 with open('users.json') as u:
     dataUsers = json.load(u)
 
+# Importamos las peliculas as data
 with open('movies.json') as f:
     data = json.load(f)
 
-
+# Login 
 @app.route('/login', methods=['POST'])  
 def login():
     username = request.form['username']
@@ -26,25 +29,27 @@ def login():
         
     return redirect('/home_guest')
 
-
+# Render home registrado
 @app.route('/home')
 def home():
     return render_template('home.html')
 
+# Render home invitado
 @app.route('/home_guest')
 def home_guest():
     return render_template('home_guest.html')
 
-
+# Endpoint pelis invitado
 @app.route('/home_guest', methods=['POST'])
 def handle_click():
-
     return data
 
-@app.route('/movies')
-def getMovies():
-    return jsonify({"Peliculas": data, "mensaje": "Lista de peliculas"})
+# Endpoint pelis registrados
+@app.route('/home', methods=['POST'])
+def handle_click2():
+    return data
 
+# Endpoint pelicula buscada
 @app.route('/movies/<string:movie_title>')
 def getMovie(movie_title):
     PeliBuscada = [peli for peli in data if peli['title'] == movie_title]
@@ -54,18 +59,18 @@ def getMovie(movie_title):
         
     return jsonify({'Mensaje': "Pelicula no encontrada"})
 
-@app.route('/movie/add_movie', methods=['POST'])
+@app.route('/movies/add_movie', methods=['POST'])
 def addMovie():
     if request.method == 'POST':
         new_movie = {
-            "title": request.form['title'],
-            "director": request.form['director'],
-            "release_year": request.form['release_year'],
-            "rating": request.form['rating']
+            "title": request.form["title"],
+            "director": request.form["director"],
+            "release_year": request.form["release_year"],
+            "rating": request.form["rating"]
         }
 
         data.append(new_movie)
-        with open('movies.json', 'w') as f:
+        with open("movies.json", "w") as f:
             json.dump(data, f)
         
         return jsonify({"Movies": data})
