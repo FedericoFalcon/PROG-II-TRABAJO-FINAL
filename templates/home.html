@@ -66,5 +66,12 @@
     <form method="delete">
         <input type="submit" value="Eliminar pelicula">
     </form>
+
+    <h1>Buscar peli</h1>
+    <form method="GET" action="/search">
+        <label for="movie_title">Buscar película:</label>
+        <input type="text" name="movie_title" id="movie_title" required>
+        <button type="submit">Buscar</button>
+      </form>
 </body>
 </html>

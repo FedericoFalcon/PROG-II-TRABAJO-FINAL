@@ -59,6 +59,16 @@ def getMovie(movie_title):
         
     return jsonify({'Mensaje': "Pelicula no encontrada"})
 
+@app.route('/search')
+def searchMovie():
+    movie_title = request.args.get('movie_title')
+    PeliBuscada = [peli for peli in data if peli['title'] == movie_title]
+
+    if (len(PeliBuscada) > 0):
+        return jsonify({"Pelicula": PeliBuscada[0]})
+
+    return jsonify({'Mensaje': "Pelicula no encontrada"})
+
 @app.route('/movies/add_movie', methods=['POST'])
 def addMovie():
     if request.method == 'POST':
