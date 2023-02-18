@@ -49,9 +49,14 @@
 
     </form>
 
-    <form method="delete">
-        <input type="submit" value="Eliminar pelicula">
-    </form>
+    <div class="form-box">
+        <h3>Borrar pelicula</h3>
+        <form method="GET" action="/delete_movie">
+            <label for="movie_title">Título:</label>
+            <input type="text" name="movie_title" id="movie_title" required>
+            <input type="submit" value="Borrar">
+          </form>
+    </div>
 
 </body>
 

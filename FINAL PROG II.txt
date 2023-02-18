@@ -19,7 +19,7 @@
 	Devolver las peliculas que tienen de portada agregada
 	Funcionalidad adicional
 
--Documentar con postman	
+-Documentar con postman	- Hacer
 
 -Febrero:
 	Paginado

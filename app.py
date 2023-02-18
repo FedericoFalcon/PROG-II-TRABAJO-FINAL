@@ -50,15 +50,6 @@ def handle_click2():
     return data
 
 # Endpoint pelicula buscada
-@app.route('/movies/<string:movie_title>')
-def getMovie(movie_title):
-    PeliBuscada = [peli for peli in data if peli['title'] == movie_title]
-
-    if (len(PeliBuscada) > 0):  
-        return jsonify({"Pelicula": PeliBuscada[0]})
-        
-    return jsonify({'Mensaje': "Pelicula no encontrada"})
-
 @app.route('/search')
 def searchMovie():
     movie_title = request.args.get('movie_title')
@@ -69,6 +60,7 @@ def searchMovie():
 
     return jsonify({'Mensaje': "Pelicula no encontrada"})
 
+# Agrega una peli al listado (solo usuarios registrados)
 @app.route('/movies/add_movie', methods=['POST'])
 def addMovie():
     if request.method == 'POST':
@@ -86,6 +78,7 @@ def addMovie():
     return jsonify({"Movies": data})
 
 
+
 @app.route('/movies/<string:movie_title>', methods=['PUT'])
 def editMovie(movie_title):
     PeliBuscada = [peli for peli in data if peli['title'] == movie_title]
@@ -99,15 +92,32 @@ def editMovie(movie_title):
         return jsonify({"message": "Pelicula actualizada", "Pelicula": PeliBuscada[0]})
     return jsonify({"message": "Pelicula no encontrada"})
 
-@app.route('/movies/<string:movie_title>', methods = ['DELETE'])
-def deleteMovie(movie_title):
+@app.route('/delete_movie')
+def deleteMovie():
+
+    movie_title = request.args.get('movie_title')
     PeliBuscada = [peli for peli in data if peli['title'] == movie_title]
+  
 
     if (len(PeliBuscada) > 0):
-        data.remove(PeliBuscada[0])
-        return jsonify({ "message": "Pelicula eliminada correctamente", "Movies": data})
+        for movie in data:
+            if movie['title'] == PeliBuscada[0]['title']:
+                data.remove(movie)
+                with open("movies.json", "w") as f:
+                    json.dump(data, f)
+                return jsonify({"OK. Peliculas Actualizadas": data})
+
+    return jsonify({'Mensaje': "Pelicula no encontrada"})
+
+
+
+    # PeliBuscada = [peli for peli in data if peli['title'] == movie_title]
+
+    # if (len(PeliBuscada) > 0):
+    #     data.remove(PeliBuscada[0])
+    #     return jsonify({ "message": "Pelicula eliminada correctamente", "Movies": data})
     
-    return jsonify({"message": "Pelicula no encontrada"})
+    # return jsonify({"message": "Pelicula no encontrada"})
 
 
 app.run(debug=True)
