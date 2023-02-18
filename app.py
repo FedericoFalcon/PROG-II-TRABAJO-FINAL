@@ -111,14 +111,5 @@ def deleteMovie():
 
 
 
-    # PeliBuscada = [peli for peli in data if peli['title'] == movie_title]
-
-    # if (len(PeliBuscada) > 0):
-    #     data.remove(PeliBuscada[0])
-    #     return jsonify({ "message": "Pelicula eliminada correctamente", "Movies": data})
-    
-    # return jsonify({"message": "Pelicula no encontrada"})
-
-
 app.run(debug=True)
 
