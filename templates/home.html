@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>CUEVANARK HOME</title>
 </head>
 <body>
     <h1> BIENVENIDO AL HOME USUARIO REGISTRADO</h1>
@@ -12,6 +12,18 @@
     <div>
         <form method="post">
             <input type="submit" value="Ver listado de peliculas">
+        </form>
+    </div>
+
+    <div>
+        <form method="get" action="/directors">
+            <input type="submit" value="Ver listado de directores">
+        </form>
+    </div>
+
+    <div>
+        <form method="get" action="/genres">
+            <input type="submit" value="Ver listado de generos">
         </form>
     </div>
 
@@ -25,33 +37,162 @@
     </div>
 
     <div class="form-box">
-        <h3>Agregar pelicula</h3>
-        <form method="post" action="/movies/add_movie">
+        <h3>Buscar por director</h3>
+        <form method="GET" action="/search_director">
+            <label for="movie_director">Director:</label>
+            <input type="text" name="movie_director" id="movie_director" required>
+            <input type="submit" value="Buscar">
+          </form>
+    </div>
+
+    <div class="form-box">
+        <h3>Buscar por actor</h3>
+        <form method="GET" action="/search_cast">
+            <label for="movie_cast">Actor:</label>
+            <input type="text" name="movie_cast" id="movie_cast" required>
+            <input type="submit" value="Buscar">
+          </form>
+    </div>
+
+    <div class="form-box">
+        <h3>Editar pelicula</h3>
+        <form method="post" action="/movies/edit_movie">
             <label for="title">Titulo:</label>
             <input type="text" name="title" id="title"><br>
       
-            <label for="director">Director:</label>
-            <input type="text" name="director" id="director"><br>
+            <label for="director">Directores</label>
+            <select id="director" name="director">
+                <option>Martin Scorsese</option>
+                <option>Quentin Tarantino</option>
+                <option>Stanley Kubrick</option>
+                <option>Alfred Hitchcock</option>
+                <option>Clint Eastwood</option>
+                <option>Tim Burton</option>
+                <option>Peter Jackson</option>
+                <option>Francis Ford Coppola</option>
+                <option>James Cameron</option>
+                <option>Woody Allen</option>
+                <option>Pedro Almodovar</option>
+                <option>Hayao Miyazaki</option>
+                <option>Christopher Nolan</option>
+                <option>Ethan Coen</option>
+                <option>Charles Chaplin</option>
+                <option>Federico Fellini</option>
+                <option>Orson Welles</option>
+                <option>Otros</option>
+            </select>
       
             <label for="release_year">Ano de Lanzamiento:</label>
             <input type="text" name="release_year" id="release_year"><br>
       
             <label for="rating">Rating:</label>
             <input type="text" name="rating" id="rating"><br>
+
+            <label for="genre">Género</label>
+            <select id="genre" name="genre">
+                <option>Ciencia Ficcion</option>
+                <option>Terror</option>
+                <option>Drama</option>
+                <option>Comedia</option>
+                <option>Accion</option>
+                <option>Thriller</option>
+                <option>Anime</option>
+                <option>Fantasia</option>
+                <option>Aventura</option>
+            </select>
+      
+            <label for="sinopsis">Sinópsis:</label>
+            <input type="text" name="sinopsis" id="sinopsis"><br>
+      
+            <label for="cast">Actores:</label>
+            <input type="text" name="cast" id="cast"><br>
+
+            <label for="img">Portada:</label>
+            <input type="text" name="img" id="img"><br>
+      
+            <input type="submit" value="Editar">
+          </form>
+    </div>
+
+    <div class="form-box">
+        <h3>Agregar pelicula</h3>
+        <form method="post" action="/movies/add_movie">
+            <label for="title">Titulo:</label>
+            <input type="text" name="title" id="title"><br>
+      
+            <label for="director">Directores</label>
+            <select id="director" name="director">
+                <option>Martin Scorsese</option>
+                <option>Quentin Tarantino</option>
+                <option>Stanley Kubrick</option>
+                <option>Alfred Hitchcock</option>
+                <option>Clint Eastwood</option>
+                <option>Tim Burton</option>
+                <option>Peter Jackson</option>
+                <option>Francis Ford Coppola</option>
+                <option>James Cameron</option>
+                <option>Woody Allen</option>
+                <option>Pedro Almodovar</option>
+                <option>Hayao Miyazaki</option>
+                <option>Christopher Nolan</option>
+                <option>Ethan Coen</option>
+                <option>Charles Chaplin</option>
+                <option>Federico Fellini</option>
+                <option>Orson Welles</option>
+                <option>Otros</option>
+            </select>
+      
+            <label for="release_year">Ano de Lanzamiento:</label>
+            <input type="text" name="release_year" id="release_year"><br>
+      
+            <label for="rating">Rating:</label>
+            <input type="text" name="rating" id="rating"><br>
+
+            <label for="genre">Género</label>
+            <select id="genre" name="genre">
+                <option>Ciencia Ficcion</option>
+                <option>Terror</option>
+                <option>Drama</option>
+                <option>Comedia</option>
+                <option>Accion</option>
+                <option>Thriller</option>
+                <option>Anime</option>
+                <option>Fantasia</option>
+                <option>Aventura</option>
+            </select>
+      
+            <label for="sinopsis">Sinópsis:</label>
+            <input type="text" name="sinopsis" id="sinopsis"><br>
+      
+            <label for="comments">Comentario:</label>
+            <input type="text" name="comments" id="comments"><br>
+      
+            <label for="cast">Actores:</label>
+            <input type="text" name="cast" id="cast"><br>
+
+            <label for="img">Portada:</label>
+            <input type="text" name="img" id="img"><br>
       
             <input type="submit" value="Añadir">
           </form>
     </div>
 
-
-    <form method="put">
-        <input type="submit" value="Editar pelicula">
-
-    </form>
+    <div class="form-box">
+        <h3>Comentar pelicula</h3>
+        <form method="post" action="/movies/comment_movie">
+            <label for="title">Titulo:</label>
+            <input type="text" name="title" id="title"><br>
+      
+            <label for="comments">Comentario:</label>
+            <input type="text" name="comments" id="comments"><br>
+      
+            <input type="submit" value="Comentar">
+          </form>
+    </div>
 
     <div class="form-box">
         <h3>Borrar pelicula</h3>
-        <form method="GET" action="/delete_movie">
+        <form method="get" action="/movies/delete_movie">
             <label for="movie_title">Título:</label>
             <input type="text" name="movie_title" id="movie_title" required>
             <input type="submit" value="Borrar">
@@ -87,6 +228,9 @@
     }
     input{
         margin-bottom: 10px;
+    }
+    select{
+        margin-bottom: 20px;
     }
 
     .form-box{
